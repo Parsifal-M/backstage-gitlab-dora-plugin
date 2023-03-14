@@ -9,7 +9,8 @@ import {
   HeaderLabel,
   SupportButton,
 } from '@backstage/core-components';
-import { ExampleFetchComponent } from '../ExampleFetchComponent';
+import { DeployFrequency } from '../DeployFrequency/DeployFrequency';
+import { DeployFrequencyForm } from '../DeployFrequencyForm/DeployFrequencyForm';
 
 export const DoraPage = () => (
   <Page themeId="tool">
@@ -18,7 +19,7 @@ export const DoraPage = () => (
       <HeaderLabel label="Lifecycle" value="Alpha" />
     </Header>
     <Content>
-      <ContentHeader title="Plugin title">
+      <ContentHeader title="Dora Metrics">
         <SupportButton>A description of your plugin goes here.</SupportButton>
       </ContentHeader>
       <Grid container spacing={3} direction="column">
@@ -29,8 +30,13 @@ export const DoraPage = () => (
             </Typography>
           </InfoCard>
         </Grid>
+      </Grid>
+      <Grid container spacing={3} direction="column">
         <Grid item>
-          <ExampleFetchComponent />
+          <DeployFrequency />
+        </Grid>
+        <Grid item>
+          <DeployFrequencyForm />
         </Grid>
       </Grid>
     </Content>

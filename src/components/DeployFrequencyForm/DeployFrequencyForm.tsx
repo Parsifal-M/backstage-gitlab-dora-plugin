@@ -1,13 +1,10 @@
-import React, { useState } from 'react';
+import React from 'react';
 import {
   Card,
   CardContent,
   CardHeader,
-  Typography,
   FormControl,
   InputLabel,
-  Select,
-  MenuItem,
   Button,
   makeStyles,
 } from '@material-ui/core';
@@ -28,7 +25,7 @@ const useStyles = makeStyles((theme) => ({
 
 
 
-export const DeployFrequency = () => {
+export const DeployFrequencyForm = () => {
   const classes = useStyles();
 
 
@@ -37,9 +34,26 @@ export const DeployFrequency = () => {
 
   return (
     <Card>
-      <CardHeader title="Deployment Frequency" />
+      <CardHeader title="Deployment Frequency Dates" />
       <CardContent>
-        <h1>Deployment Frequency Will Go Here</h1>
+        <FormControl className={classes.formControl}>
+          <InputLabel id="project-select-label">Project</InputLabel>
+        </FormControl>
+        <LocalizationProvider dateAdapter={AdapterDayjs}>
+        <DatePicker
+          className={classes.datePicker}
+          label="Start Date"
+          value="StartDate"
+        />
+        <DatePicker
+          className={classes.datePicker}
+          label="End Date"
+          value="EndDate"
+        />
+        </LocalizationProvider>
+        <Button variant="contained" color="primary">
+          Calculate
+        </Button>
       </CardContent>
     </Card>
   );

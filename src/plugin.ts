@@ -13,7 +13,7 @@ export const GitlabDoraPage = gitlabDoraPlugin.provide(
   createRoutableExtension({
     name: 'GitlabDoraPage',
     component: () =>
-      import('./components/ExampleComponent').then(m => m.ExampleComponent),
+      import('./components/DoraPage').then(m => m.DoraPage),
     mountPoint: rootRouteRef,
   }),
 );
