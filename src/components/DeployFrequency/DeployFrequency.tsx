@@ -1,45 +1,52 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   Card,
   CardContent,
   CardHeader,
-  Typography,
-  FormControl,
-  InputLabel,
-  Select,
-  MenuItem,
-  Button,
-  makeStyles,
+  // makeStyles,
 } from '@material-ui/core';
-import { DatePicker } from '@mui/x-date-pickers';
-import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { fetchDeploymentFrequency } from '../../api/doraApi';
+import { DeployFrequencyProps } from '../../types/DeployFrequencyProps';
 
-const useStyles = makeStyles((theme) => ({
-  formControl: {
-    margin: theme.spacing(1),
-    minWidth: 120,
-  },
-  datePicker: {
-    marginLeft: theme.spacing(1),
-    marginRight: theme.spacing(1),
-  },
-}));
-
+// const useStyles = makeStyles((theme) => ({
+//   formControl: {
+//     margin: theme.spacing(1),
+//     minWidth: 120,
+//   },
+//   datePicker: {
+//     marginLeft: theme.spacing(1),
+//     marginRight: theme.spacing(1),
+//   },
+// }));
 
 
-export const DeployFrequency = () => {
-  const classes = useStyles();
 
+export const DeployFrequency = ({
+  project,
+  date,
+  gitlabAccessToken,
+}: DeployFrequencyProps) => {
+  // const classes = useStyles();
+  const [deployFrequency, setDeployFrequency] = useState<number | null>(null);
 
-  const handleProjectChange = (event: React.ChangeEvent<{ value: unknown }>) => {
-  };
+  useEffect(() => {
+    if (project && date) {
+      fetchDeploymentFrequency(project, date, gitlabAccessToken)
+        .then((data) => setDeployFrequency(data.deployFrequency))
+        // eslint-disable-next-line no-console
+        .catch((error) => console.error(error));
+    }
+  }, [project, date, gitlabAccessToken]);
 
   return (
     <Card>
       <CardHeader title="Deployment Frequency" />
       <CardContent>
-        <h1>Deployment Frequency Will Go Here</h1>
+        {deployFrequency !== null ? (
+          <h1>{deployFrequency} deploys per day</h1>
+        ) : (
+          <h1>Deployment Frequency Will Go Here</h1>
+        )}
       </CardContent>
     </Card>
   );

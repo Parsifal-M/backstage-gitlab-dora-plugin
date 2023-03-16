@@ -33,7 +33,7 @@ export const DoraPage = () => (
       </Grid>
       <Grid container spacing={3} direction="column">
         <Grid item>
-          <DeployFrequency />
+          <DeployFrequency project='' date='2023-03-15' gitlabAccessToken='' />
         </Grid>
         <Grid item>
           <DeployFrequencyForm />
