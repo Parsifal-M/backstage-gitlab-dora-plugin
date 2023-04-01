@@ -9,8 +9,10 @@ import {
   HeaderLabel,
   SupportButton,
 } from '@backstage/core-components';
-import { DeployFrequency } from '../DeployFrequency/DeployFrequency';
-import { DeployFrequencyForm } from '../DeployFrequencyForm/DeployFrequencyForm';
+import { Deployments } from '../TotalDeployments/TotalDeployments';
+
+
+
 
 export const DoraPage = () => (
   <Page themeId="tool">
@@ -31,14 +33,10 @@ export const DoraPage = () => (
           </InfoCard>
         </Grid>
       </Grid>
-      <Grid container spacing={3} direction="column">
+
         <Grid item>
-          <DeployFrequency project='' date='2023-03-15' gitlabAccessToken='' />
+            <Deployments />
         </Grid>
-        <Grid item>
-          <DeployFrequencyForm />
-        </Grid>
-      </Grid>
     </Content>
   </Page>
 );
