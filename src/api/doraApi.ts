@@ -11,11 +11,18 @@ export async function getGitlabProjects(): Promise<GitlabProjectApiCall[]> {
 }
 
 export async function getGitlabDeployments(projectId: number): Promise<GitlabDeployFrequencyApiCall[]> {
+  const token = '<Token>'; // Replace with your actual GitLab access token
+
   try {
-    const response = await fetch(`https://gitlab.com/api/v4/projects/${projectId}/deployments`);
+    const response = await fetch(`https://gitlab.com/api/v4/projects/${projectId}/deployments`, {
+      headers: {
+        'Authorization': `Bearer ${token}`,
+      },
+    });
     const deployments = await response.json();
     return deployments;
   } catch (error) {
     throw new Error('Failed to fetch GitLab deployments');
   }
 }
+

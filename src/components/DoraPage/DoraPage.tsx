@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Typography, Grid } from '@material-ui/core';
 import {
   InfoCard,
@@ -9,34 +9,46 @@ import {
   HeaderLabel,
   SupportButton,
 } from '@backstage/core-components';
-import { Deployments } from '../TotalDeployments/TotalDeployments';
+import { GitlabDeployments } from '../TotalDeployments/GitlabDeployments';
+import { DeployFrequencyForm } from '../DeployFrequencyForm/DeployFrequencyForm';
+import { DeploymentsOverTime } from '../DeploymentsOverTime/DeploymentsOverTime';
 
+export const DoraPage = () => {
+  const [projectId, setProjectId] = useState<number | null>(null);
 
+  const handleProjectIdSubmit = (submittedProjectId: number) => {
+    setProjectId(submittedProjectId);
+  };
 
-
-export const DoraPage = () => (
-  <Page themeId="tool">
-    <Header title="Welcome to gitlab-dora!" subtitle="Optional subtitle">
-      <HeaderLabel label="Owner" value="Team X" />
-      <HeaderLabel label="Lifecycle" value="Alpha" />
-    </Header>
-    <Content>
-      <ContentHeader title="Dora Metrics">
-        <SupportButton>A description of your plugin goes here.</SupportButton>
-      </ContentHeader>
-      <Grid container spacing={3} direction="column">
-        <Grid item>
-          <InfoCard title="Information card">
-            <Typography variant="body1">
-              All content should be wrapped in a card like this.
-            </Typography>
-          </InfoCard>
+  return (
+    <Page themeId="tool">
+      <Header title="Welcome to gitlab-dora!" subtitle="Optional subtitle">
+        <HeaderLabel label="Owner" value="Team X" />
+        <HeaderLabel label="Lifecycle" value="Alpha" />
+      </Header>
+      <Content>
+        <ContentHeader title="Dora Metrics">
+          <SupportButton>A description of your plugin goes here.</SupportButton>
+        </ContentHeader>
+        <Grid container spacing={3} direction="column">
+          <Grid item>
+            <InfoCard title="Information card">
+              <Typography variant="body1">
+                All content should be wrapped in a card like this.
+              </Typography>
+              <DeployFrequencyForm onProjectIdSubmit={handleProjectIdSubmit} />
+            </InfoCard>
+          </Grid>
+          <Grid item md={4}>
+            <InfoCard title="Total Deployments">
+              <GitlabDeployments projectId={projectId} />
+            </InfoCard>
+          </Grid>
+          <Grid item>
+            <DeploymentsOverTime projectId={projectId} />
+          </Grid>
         </Grid>
-      </Grid>
-
-        <Grid item>
-            <Deployments />
-        </Grid>
-    </Content>
-  </Page>
-);
+      </Content>
+    </Page>
+  );
+};

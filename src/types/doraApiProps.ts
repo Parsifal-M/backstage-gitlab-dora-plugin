@@ -4,6 +4,8 @@ export interface GitlabProjectApiCall {
   }
 
 export interface GitlabDeployFrequencyApiCall {
+  created_at: string | number | Date;
+  deployable: any;
   status: string;
   environment: string;
 }

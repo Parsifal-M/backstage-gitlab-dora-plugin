@@ -33,7 +33,9 @@
     "@material-ui/lab": "4.0.0-alpha.57",
     "@mui/material": "^5.11.13",
     "@mui/x-date-pickers": "^6.0.1",
+    "chart.js": "^4.2.1",
     "dayjs": "^1.11.7",
+    "react-chartjs-2": "^5.2.0",
     "react-use": "^17.2.4"
   },
   "peerDependencies": {
