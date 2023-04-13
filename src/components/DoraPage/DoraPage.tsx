@@ -31,23 +31,24 @@ export const DoraPage = () => {
           <SupportButton>A description of your plugin goes here.</SupportButton>
         </ContentHeader>
         <Grid container spacing={3} direction="column">
-          <Grid item>
-            <InfoCard title="Information card">
-              <Typography variant="body1">
-                All content should be wrapped in a card like this.
-              </Typography>
+          <Grid item md={12}>
+            <InfoCard title="">
               <DeployFrequencyForm onProjectIdSubmit={handleProjectIdSubmit} />
             </InfoCard>
           </Grid>
-          <Grid item md={4}>
-            <InfoCard title="Total Deployments">
-              <GitlabDeployments projectId={projectId} />
-            </InfoCard>
-          </Grid>
-          <Grid item>
-            <DeploymentsOverTime projectId={projectId} />
-          </Grid>
         </Grid>
+          <Grid container spacing={3} direction="row">
+            <Grid item md={6}>
+              <InfoCard title="Deployments Over Time">
+                <DeploymentsOverTime projectId={projectId} />
+              </InfoCard>
+            </Grid>
+            <Grid item md={6}>
+              <InfoCard title="Total Deployments">
+                <GitlabDeployments projectId={projectId} />
+              </InfoCard>
+            </Grid>
+          </Grid>
       </Content>
     </Page>
   );
